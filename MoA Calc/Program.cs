@@ -1,4 +1,4 @@
-﻿namespace MoA_Calc
+namespace MoA_Calc
 {
     class Program
     {
@@ -26,7 +26,7 @@
                 double testNum1 = 0;
                 while (!double.TryParse(numInput1, out testNum1))
                 {
-                    Console.Write("This is not valid input. Please enter an integer or double value: ");
+                    Console.Write("This is not valid number. Please enter an integer or double value: ");
                     numInput1 = Console.ReadLine();
                 }
 
@@ -37,7 +37,7 @@
                 double testNum2 = 0;
                 while (!double.TryParse(numInput2, out testNum2))
                 {
-                    Console.Write("This is not valid input. Please enter an integer value: ");
+                    Console.Write("This is not valid number. Please enter an integer or double value: ");
                     numInput2 = Console.ReadLine();
                 }
                 // Ask user to input clicks per MOA on their scope
@@ -47,19 +47,17 @@
                 double testNum3 = 0;
                 while (!double.TryParse(numInput3, out testNum3))
                 {
-                    Console.Write("This is not valid input. Please enter an integer or double value: ");
+                    Console.Write("This is not valid number. Please enter an integer or double value: ");
                     numInput3 = Console.ReadLine();
                 }
                 MoA moA = new MoA(testNum1,testNum2,testNum3);
-                MoA.PrintMoa(moA.MoAMath(testNum1, testNum2, testNum3));
+                MoA.PrintMoa(moA.MoAMath(moA));
 
                 Console.WriteLine("------------------------\n");
 
                 // Wait for the user to respond before closing.
                 Console.Write("Press 'Q' and Enter to close the app, or press any other key and Enter to continue: ");
                 if (Console.ReadLine() == "Q") endApp = true;
-
-                Console.WriteLine("\n"); // Friendly linespacing.
             }
             return;
         }
