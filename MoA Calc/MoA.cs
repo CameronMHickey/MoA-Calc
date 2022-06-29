@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,30 +21,26 @@ namespace MoA_Calc
             this.num2 = num2;
             this.num3 = num3;
         }
-        public double[] MoAMath(double num1, double num2, double num3) // Math operators for inches per MOA, MOA Degree Adjustment, Clicks required on scope 
+        public double[] MoAMath(MoA moA) // Creates Array and computes the values for the MoA table
         {
-            double moainch = num1 / (100);
-            double moaAdjust = num2 / moainch;
-
-            double moaScope = num3 / moaAdjust;
-
-            double[] MinuteAngle = new double[3];
-            MinuteAngle[0] = moainch;
-            MinuteAngle[1] = moaAdjust;
-            MinuteAngle[2] = moaScope;
-
+            double holder = 100.0;
+            double[] MinuteAngle = new double[] { moA.num1, moA.num2, moA.num3 };  // Create an Array to iterate through
+            for (int i = 0; i < MinuteAngle.Length; i++)                           // For loop computes the values for the MoA
+            {
+               MinuteAngle[i] = MinuteAngle[i] / holder;
+               holder = MinuteAngle[i];  
+            }
             return MinuteAngle;
         }
         public static void PrintMoa(double[] Minute) // Prints the MoA table
         {       
             Console.WriteLine($"\t Inches per MOA at that distance : {Minute[0]} ");
-            Console.WriteLine($"\t MOA adjustment : {Minute[1]} Inches");
+            Console.WriteLine($"\t MOA adjustment : {Minute[1]} Degrees ");
             if (!(Minute[2] > 0) & !(Minute[2] < 0))
             {
-                Console.WriteLine("No adjustment is needed.");     // Quick catch case if adjustment is 0
+                Console.WriteLine("No adjustment is needed.");     // Quick catch if adjustment is 0
             }
-            else Console.WriteLine($"\t Adjustment in clicks on scope : {Minute[2]} Clicks");
-        }
-        
+            else Console.WriteLine($"\t Adjustment in clicks on scope : {Minute[2]} Clicks ");
+        } 
     }
 }
